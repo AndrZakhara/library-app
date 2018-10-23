@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Header } from './Header';
-import { Form } from '../components/Form';
+import { AuthForm } from '../components/AuthForm';
 import { handleLogin, handleLogout, handleTypePageEntry } from '../actions/userFormActions';
 
 class App extends Component {
@@ -25,7 +25,7 @@ class App extends Component {
                     handleLogout = {handleLogout}
                     handleTypePageEntry = {handleTypePageEntry}
                 />
-                <Form
+                <AuthForm
                     handleLogin = {handleLogin}
                     entryType = {entryType}
                 />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class Form extends Component {
+export class AuthForm extends Component {
 
     handleSubmit(e, handleLogin) {
         e.preventDefault();
@@ -11,7 +11,6 @@ export class Form extends Component {
             handleLogin,
             entryType,
         } = this.props;
-
 
         switch (entryType) {
             case 'login':
@@ -65,7 +64,6 @@ export class Form extends Component {
                             />
                         </form>
                     </div>
-
                 );
 
             default:

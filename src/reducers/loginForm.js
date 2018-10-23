@@ -21,7 +21,7 @@ export function loginFormReducer(state = initialState, action) {
             return { ...state, isFetching: true, error: '' };
 
         case LOGIN_SUCCESS:
-            return { ...state, isFetching: false, userName: action.payload, isAuth: true }
+            return { ...state, isFetching: false, userName: action.payload, isAuth: true, entryType: '', }
 
         case LOGIN_FAIL:
             return { ...state, isFetching: false, error: action.payload.message };
@@ -37,5 +37,5 @@ export function loginFormReducer(state = initialState, action) {
 
         default:
             return state;
-      }
+    }
 } 

@@ -4,15 +4,16 @@ import { UnregistryUser } from '../components/UnregistryUser';
 
 export class Header extends Component {
 
-    hederInfo (isAuth, userName, handleLogout) {
+    headerInfo (isAuth, userName, handleLogout, handleTypePageEntry) {
         if(isAuth) {
             return <RegistryUser
                 userName = {userName}
                 handleLogout = {handleLogout}
-
             />;
         } else {
-            return <UnregistryUser />;
+            return <UnregistryUser
+                handleTypePageEntry = {handleTypePageEntry}
+            />;
         }
     }
 
@@ -21,11 +22,12 @@ export class Header extends Component {
         const {
             userName,
             isAuth,
-            handleLogout
+            handleLogout,
+            handleTypePageEntry
         } = this.props;
         console.log(this.props.isAuth);
 
-        const pageAuthOrUserInfo = this.hederInfo(isAuth, userName, handleLogout);
+        const pageAuthOrUserInfo = this.headerInfo(isAuth, userName, handleLogout, handleTypePageEntry);
 
         return (
             <div>

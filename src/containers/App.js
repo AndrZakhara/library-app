@@ -11,6 +11,7 @@ class App extends Component {
         const {
             userName,
             isAuth,
+            entryType,
             handleLogin,
             handleLogout,
             handleTypePageEntry,
@@ -22,10 +23,11 @@ class App extends Component {
                     userName = {userName}
                     isAuth = {isAuth}
                     handleLogout = {handleLogout}
+                    handleTypePageEntry = {handleTypePageEntry}
                 />
                 <Form
                     handleLogin = {handleLogin}
-                    handleTypePageEntry = {handleTypePageEntry}
+                    entryType = {entryType}
                 />
             </div>
         );
@@ -38,6 +40,7 @@ const mapStateToProps = store => {
     return {
         userName: store.loginForm.userName,
         isAuth: store.loginForm.isAuth,
+        entryType: store.loginForm.entryType
     }
 };
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Header } from './Header';
-import { AuthForm } from '../components/AuthForm';
+import  AuthForm  from '../components/AuthForm';
 import { handleLogin, handleLogout, handleTypePageEntry } from '../actions/userFormActions';
 
 class App extends Component {

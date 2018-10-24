@@ -11,7 +11,8 @@ export const REGISTRY_FAIL = 'REGISTRY_FAIL';
 
 export const LOGOUT = 'LOGOUT';
 
-export function handleLogin() {    
+export function handleLogin() {
+
     return dispatch => {
         dispatch({
             type: LOGIN_REQUEST,
@@ -34,13 +35,13 @@ export function handleLogin() {
             })
         } 
     }
-  };
+  }
 
 export function handleRegistry() {
     return function(dispatch) {
         dispatch({
             type: REGISTRY_REQUEST,
-        })  
+        });
       
         if (true) {
             let username = 'Register User';

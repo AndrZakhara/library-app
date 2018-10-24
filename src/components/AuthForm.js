@@ -1,23 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-const validate = values => {
+const validate = (values, registeredFields) => {
     const errors = {};
     if (!values.username) {
         errors.username = 'Required';
     } else if (values.username.length > 15 || values.username.length < 3) {
         errors.username = 'Must be between 3 and 8 characters';
     }
-    if (!values.email) {
-        errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address';
-    }
+
+    // if (!values.email) {
+    //     errors.email = 'Required';
+    // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    //     errors.email = 'Invalid email address';
+    // }
     if (!values.password) {
         errors.password = 'Required'
     } else if (values.password.length > 8 || values.password.length < 3) {
         errors.password = 'Must be between 3 and 8 characters'
     }
+    // if (!values.passwordDuplicate) {
+    //     errors.passwordDuplicate = 'Required'
+    // } else if (values.passwordDuplicate !== values.password) {
+    //     errors.passwordDuplicate = 'password must be the same as in the previous field'
+    // }
     return errors
 };
 
@@ -38,24 +44,78 @@ const renderField = ({
     </div>
 );
 
-const syncValidationForm = props => {
-    const { handleSubmit, pristine, reset, submitting } = props;
+const authValidationForm = props => {
+    const {
+        // handleSubmit,
+        pristine,
+        reset,
+        submitting,
+        entryType,
+        handleLogin,
+        formSyncErrors
+    } = props;
+    // console.log(formSyncErrors);
+
+const activeButtonSend = (formSyncErrors) => {
+        if(formSyncErrors.hasOwnProperty('authValidation')) {
+            console.log('authValidation');
+            if(formSyncErrors.authValidation.hasOwnProperty('syncErrors')) {
+                return false;
+            } else return true;
+        }
+};
+
+console.log(activeButtonSend(formSyncErrors));
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form
+            // onSubmit={handleSubmit}
+        >
             <Field
                 name="username"
                 type="text"
                 component={renderField}
                 label="Username"
             />
-            <Field name="email" type="email" component={renderField} label="Email" />
-            <Field name="password" type="text" component={renderField} label="Password" />
+            {/*{entryType === 'signUp' ?*/}
+                {/*(<Field*/}
+                    {/*name="email"*/}
+                    {/*type="email"*/}
+                    {/*component={renderField}*/}
+                    {/*label="Email"*/}
+                {/*/>)*/}
+            {/*: null}*/}
+
+            <Field
+                name="password"
+                type="text"
+                component={renderField}
+                label="Password"
+            />
+            {/*{entryType === 'signUp' ?*/}
+                {/*(<Field*/}
+                    {/*name="passwordDuplicate"*/}
+                    {/*type="text"*/}
+                    {/*component={renderField}*/}
+                    {/*label="Password"*/}
+                {/*/>)*/}
+            {/*: null}*/}
+
             <div>
-                <button type="submit" disabled>
-                    Submit
+                <button
+                    onClick={() => handleLogin()}
+                    type="button"
+                    // type="submit"
+                    // disabled = {pristine}
+                    disabled = {activeButtonSend(formSyncErrors) ? pristine : 'disabled'}
+                >
+                    {entryType === 'login'? 'Log In' : 'Sign Up'}
                 </button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>
-                    Clear Values
+                <button
+                    type="button"
+                    disabled={pristine || submitting}
+                    onClick={reset}>
+                    Restore
                 </button>
             </div>
         </form>
@@ -63,9 +123,10 @@ const syncValidationForm = props => {
 };
 
 const AuthForm = reduxForm({
-    form: 'syncValidation',
+    form: 'authValidation',
     validate,
-})(syncValidationForm);
+})(authValidationForm);
+
 
 export default AuthForm;
 

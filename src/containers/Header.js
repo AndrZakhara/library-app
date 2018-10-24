@@ -18,14 +18,12 @@ export class Header extends Component {
     }
 
     render() {
-        console.log(this.props);
         const {
             userName,
             isAuth,
             handleLogout,
             handleTypePageEntry
         } = this.props;
-        console.log(this.props.isAuth);
 
         const pageAuthOrUserInfo = this.headerInfo(isAuth, userName, handleLogout, handleTypePageEntry);
 

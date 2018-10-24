@@ -15,6 +15,7 @@ class App extends Component {
             handleLogin,
             handleLogout,
             handleTypePageEntry,
+            formSyncErrors
         } = this.props;
 
         return (
@@ -25,22 +26,26 @@ class App extends Component {
                     handleLogout = {handleLogout}
                     handleTypePageEntry = {handleTypePageEntry}
                 />
-                <AuthForm
-                    handleLogin = {handleLogin}
-                    entryType = {entryType}
-                />
+                { entryType ? (
+                        <AuthForm
+                            handleLogin = {handleLogin}
+                            entryType = {entryType}
+                            formSyncErrors = {formSyncErrors}
+                        />
+                    ) : null }
             </div>
         );
     }
 }
 
 const mapStateToProps = store => {
-    console.log(store);
+    console.log(store.form);
 
     return {
         userName: store.loginForm.userName,
         isAuth: store.loginForm.isAuth,
-        entryType: store.loginForm.entryType
+        entryType: store.loginForm.entryType,
+        formSyncErrors: store.form
     }
 };
 

@@ -5,7 +5,7 @@ const validate = (values, registeredFields) => {
     const errors = {};
     if (!values.username) {
         errors.username = 'Required';
-    } else if (values.username.length > 15 || values.username.length < 3) {
+    } else if (values.username.length > 8 || values.username.length < 3) {
         errors.username = 'Must be between 3 and 8 characters';
     }
 

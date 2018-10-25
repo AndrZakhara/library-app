@@ -56,20 +56,22 @@ const authValidationForm = props => {
     } = props;
     // console.log(formSyncErrors);
 
-const activeButtonSend = (formSyncErrors) => {
+    const activeButtonSend = (formSyncErrors) => {
         if(formSyncErrors.hasOwnProperty('authValidation')) {
             console.log('authValidation');
             if(formSyncErrors.authValidation.hasOwnProperty('syncErrors')) {
                 return false;
             } else return true;
         }
-};
+    };
 
-console.log(activeButtonSend(formSyncErrors));
+    // console.log(activeButtonSend(formSyncErrors));
+    const user = {name: 'Vasya', password: '12345'};
 
     return (
         <form
             // onSubmit={handleSubmit}
+            //     onClick={handleLogin(user)}
         >
             <Field
                 name="username"
@@ -103,8 +105,9 @@ console.log(activeButtonSend(formSyncErrors));
 
             <div>
                 <button
-                    onClick={() => handleLogin()}
+                    // onClick={() => handleLogin()}
                     type="button"
+                    onClick={(e)=>handleLogin(user)}
                     // type="submit"
                     // disabled = {pristine}
                     disabled = {activeButtonSend(formSyncErrors) ? pristine : 'disabled'}

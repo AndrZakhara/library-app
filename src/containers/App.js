@@ -7,7 +7,7 @@ import { handleLogin, handleLogout, handleTypePageEntry } from '../actions/userF
 class App extends Component {
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         const {
             userName,
             isAuth,
@@ -39,7 +39,7 @@ class App extends Component {
 }
 
 const mapStateToProps = store => {
-    console.log(store.form);
+    // console.log(store.form);
 
     return {
         userName: store.loginForm.userName,
@@ -51,7 +51,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleLogin: () => dispatch(handleLogin()),
+        handleLogin: (user) => dispatch(handleLogin(user)),
         handleLogout: () => dispatch(handleLogout()),
         handleTypePageEntry: (value) => dispatch(handleTypePageEntry(value))
     }

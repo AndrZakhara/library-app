@@ -25,7 +25,7 @@ export function handleLogin(user) {
             console.log(response);
             dispatch({
                 type: LOGIN_SUCCESS,
-                payload: username,
+                payload: response.body.token,
             })
         })
         .catch(function (error) {

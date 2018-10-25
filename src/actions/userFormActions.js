@@ -33,7 +33,7 @@ export function handleLogin(user) {
             dispatch({
                 type: LOGIN_FAIL,
                 error: true,
-                payload: new Error('Ошибка авторизации'),
+                payload: new Error('Authorization error'),
             })
         });
     }

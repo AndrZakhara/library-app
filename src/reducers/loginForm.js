@@ -21,7 +21,12 @@ export function loginFormReducer(state = initialState, action) {
             return { ...state, isFetching: true, error: '' };
 
         case LOGIN_SUCCESS:
-            return { ...state, isFetching: false, userName: action.payload, isAuth: true, entryType: '', }
+            return {
+                ...state,
+                isFetching: false,
+                userName: action.payload.username, isAuth: true,
+                entryType: '',
+            }
 
         case LOGIN_FAIL:
             return { ...state, isFetching: false, error: action.payload.message };

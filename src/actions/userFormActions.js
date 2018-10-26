@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -13,20 +13,28 @@ export const REGISTRY_FAIL = 'REGISTRY_FAIL';
 
 export const LOGOUT = 'LOGOUT';
 
-export function handleLogin(user) {
-    console.log(user);
+export function handleLogin(form) {
+    form.preventDefault();
+    const user = {
+        name: form.target.username.value,
+        password: form.target.password.value
+    };
+
     return (dispatch) => {
         dispatch({
             type: LOGIN_REQUEST,
         });
 
-        axios.post('http://localhost:8000/api/auth/login', user)
+        axios.post('/auth/login', user)
         .then(function (response) {
             console.log(response);
             dispatch({
                 type: LOGIN_SUCCESS,
-                payload: response.body.token,
-            })
+                payload: {
+                    username: user.name
+            }
+            });
+            localStorage.setItem('cks_token', response.data.token);
         })
         .catch(function (error) {
             console.log(error);

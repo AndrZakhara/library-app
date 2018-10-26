@@ -16,7 +16,7 @@ export const LOGOUT = 'LOGOUT';
 export function handleLogin(form) {
     form.preventDefault();
     const user = {
-        name: form.target.username.value,
+        login: form.target.username.value,
         password: form.target.password.value
     };
 
@@ -25,13 +25,13 @@ export function handleLogin(form) {
             type: LOGIN_REQUEST,
         });
 
-        axios.post('/auth/login', user)
+        axios.post('/login', user)
         .then(function (response) {
             console.log(response);
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {
-                    username: user.name
+                    username: user.login
             }
             });
             localStorage.setItem('cks_token', response.data.token);

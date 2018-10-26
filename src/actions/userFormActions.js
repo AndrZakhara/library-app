@@ -14,78 +14,76 @@ export const REGISTRY_FAIL = 'REGISTRY_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 export function handleLogin(form) {
-    form.preventDefault();
-    const user = {
-        login: form.target.username.value,
-        password: form.target.password.value
-    };
+  form.preventDefault();
+  const user = {
+    login: form.target.username.value,
+    password: form.target.password.value,
+  };
 
-    return (dispatch) => {
+  return (dispatch) => {
+    dispatch({
+      type: LOGIN_REQUEST,
+    });
+
+    axios.post('/login', user)
+      .then((response) => {
+        console.log(response);
         dispatch({
-            type: LOGIN_REQUEST,
+          type: LOGIN_SUCCESS,
+          payload: {
+            username: user.login,
+          },
         });
-
-        axios.post('/login', user)
-        .then(function (response) {
-            console.log(response);
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: {
-                    username: user.login
-            }
-            });
-            localStorage.setItem('cks_token', response.data.token);
-        })
-        .catch(function (error) {
-            console.log(error);
-            dispatch({
-                type: LOGIN_FAIL,
-                error: true,
-                payload: new Error('Authorization error'),
-            })
+        localStorage.setItem('cks_token', response.data.token);
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: LOGIN_FAIL,
+          error: true,
+          payload: new Error('Authorization error'),
         });
-    }
-  }
+      });
+  };
+}
 
 export function handleRegistry() {
-    return function(dispatch) {
-        dispatch({
-            type: REGISTRY_REQUEST,
-        });
-      
-        if (true) {
-            let username = 'Register User';
+  return function (dispatch) {
+    dispatch({
+      type: REGISTRY_REQUEST,
+    });
 
-            dispatch({
-                type: REGISTRY_SUCCESS,
-                payload: username,
-                })
-        } else {
-            dispatch({
-                type: REGISTRY_FAIL,
-                error: true,
-                payload: new Error('Ошибка авторизации'),
-            })
-        } 
+    if (true) {
+      const username = 'Register User';
+
+      dispatch({
+        type: REGISTRY_SUCCESS,
+        payload: username,
+      });
+    } else {
+      dispatch({
+        type: REGISTRY_FAIL,
+        error: true,
+        payload: new Error('Ошибка авторизации'),
+      });
     }
-  }
+  };
+}
 
 export function handleLogout() {
-    axios.defaults.headers.common = {};
-    localStorage.removeItem('cks_token');
-    return { type: LOGOUT};
+  axios.defaults.headers.common = {};
+  localStorage.removeItem('cks_token');
+  return { type: LOGOUT };
 }
 
 export function handleTypePageEntry(value) {
-    console.log(value);
-    if(value === 'login') {
-        return {
-            type: ENTRY_TYPE_LOGIN
-        }
-    } else {
-        return {
-            type: ENTRY_TYPE_SIGNUP
-        }
-    }
-
+  console.log(value);
+  if (value === 'login') {
+    return {
+      type: ENTRY_TYPE_LOGIN,
+    };
+  }
+  return {
+    type: ENTRY_TYPE_SIGNUP,
+  };
 }

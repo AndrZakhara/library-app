@@ -71,6 +71,8 @@ export function handleRegistry() {
   }
 
 export function handleLogout() {
+    axios.defaults.headers.common = {};
+    localStorage.removeItem('cks_token');
     return { type: LOGOUT};
 }
 

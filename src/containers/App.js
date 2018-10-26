@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Header } from './Header';
 import  AuthForm  from '../components/AuthForm';
 import { handleLogin, handleLogout, handleTypePageEntry } from '../actions/userFormActions';
+import { Route, Link } from "react-router-dom";
+
 
 class App extends Component {
 
@@ -18,6 +20,14 @@ class App extends Component {
             formSyncErrors
         } = this.props;
 
+        const LoginForm = (
+            <AuthForm
+                handleLogin = {handleLogin}
+                entryType = {entryType}
+                formSyncErrors = {formSyncErrors}
+            />
+        );
+
         return (
             <div className="App">
                 <Header
@@ -26,6 +36,23 @@ class App extends Component {
                     handleLogout = {handleLogout}
                     handleTypePageEntry = {handleTypePageEntry}
                 />
+                <div>
+                    <ul>
+
+                        <li>
+                            <Link to="/loginPage">Log in</Link>
+                        </li>
+                        <li>
+                            <Link to="/RegisterPage">Sign Up</Link>
+                        </li>
+                    </ul>
+
+                    <hr />
+
+                    {/*<Route exact path="/" component={MainPage} />*/}
+                    <Route path="/loginPage" component={LoginForm} />
+                    <Route path="/RegisterPage" component={LoginForm} />
+                </div>
                 { entryType ? (
                         <AuthForm
                             handleLogin = {handleLogin}
@@ -61,3 +88,7 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(App);
+
+
+
+

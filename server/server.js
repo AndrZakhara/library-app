@@ -6,8 +6,12 @@ const config = require('./config/config').get(process.env.NODE_ENV);
 const app = express();
 const port = process.env.port || 3001;
 
+const { User } = require('./models/user');
+const { Book } = require('./models/book');
+
 mongoose.Promise = global.Promise;
-mongoose.connect(config.DATABASE);
+mongoose.connect(config.DATABASE, { useNewUrlParser: true });
+mongoose.set('useCreateIndex', true);
 
 app.use(bodyParser.json());
 app.use(cookieParser());

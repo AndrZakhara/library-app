@@ -2,19 +2,14 @@
 
 # dependencies
 /node_modules
-**/node_modules
-
-# idea
-/.idea
-**/.idea
+/.pnp
+.pnp.js
 
 # testing
 /coverage
-**/coverage
 
 # production
 /build
-**/build
 
 # misc
 .DS_Store
@@ -26,5 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-package-lock.json

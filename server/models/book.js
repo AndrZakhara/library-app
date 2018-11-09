@@ -22,7 +22,7 @@ const bookSchema = mongoose.Schema({
   },
   pages: {
     type: String,
-    maxLength: 3000,
+    maxLength: 5000,
     default: 'n/a'
   },
   rating: {
